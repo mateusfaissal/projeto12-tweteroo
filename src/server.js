@@ -25,11 +25,18 @@ server.post("/sign-up", (req, res) => {
 
 server.post("/tweets", (req, res) => {
     const { username, tweet } = req.body;
-    const newTweet = { username: username, tweet };
-    tweets.push(newTweet);
+    const userValid = usuarios.find(u => u.username === username);
 
-    return res.status(201).send("OK");
+    if(userValid){
+        const username = username;
+        const newTweet = {username, tweet};
+        tweets.push(newTweet);
+        return res.status(201).send("OK");
+    }else{
+        res.status(401).send("UNAUTHORIZED");
+    }
 });
+
 
 server.get("/t", (req, res) => {
     res.send(tweets)
@@ -39,7 +46,7 @@ server.get("/tweets", (req, res) => {
     const newTweets = [];
 
     tweets.forEach(t => {
-        const avatar = t.avatar;
+        const avatar = users.find(user => user.username === t.username).avatar;
         const username = t.username;
         const tweet = t.tweet;
         const resp = { username, avatar, tweet };

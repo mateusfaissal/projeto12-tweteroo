@@ -25,7 +25,7 @@ server.post("/sign-up", (req, res) => {
 
 server.post("/tweets", (req, res) => {
     const { username, tweet } = req.body;
-    const userValid = usuarios.find(u => u.username === username);
+    const userValid = users.find(u => u.username === username);
 
     if(userValid){
         const username = username;

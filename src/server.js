@@ -25,16 +25,15 @@ server.post("/sign-up", (req, res) => {
 
 server.post("/tweets", (req, res) => {
     const { username, tweet } = req.body;
-    const userValid = users.find(u => u.username === username);
+    //const userValid = users.find(u => u.username === username);
 
-    if(userValid){
-        const username = username;
+    //if(userValid){
         const newTweet = {username, tweet};
         tweets.push(newTweet);
         return res.status(201).send("OK");
-    }else{
-        res.status(401).send("UNAUTHORIZED");
-    }
+    //}else{
+    //    res.status(401).send("UNAUTHORIZED");
+   // }
 });
 
 

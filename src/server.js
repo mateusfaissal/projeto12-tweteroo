@@ -42,9 +42,10 @@ server.get("/t", (req, res) => {
 })
 
 server.get("/tweets", (req, res) => {
+    const lastTenTweets = tweets.slice(-10).reverse();
     const newTweets = [];
 
-    tweets.forEach(t => {
+    lastTenTweets.forEach(t => {
         const avatar = users.find(user => user.username === t.username).avatar;
         const username = t.username;
         const tweet = t.tweet;
